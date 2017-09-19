@@ -289,7 +289,16 @@ deployTask.getHandler = function (grunt) {
               return setPackageVersionAlias(deploy_function);
             })
             .then(function () {
-              done(true);
+              if (configParams.VpcConfig !== null) {
+                configParams.VpcConfig = {
+                  SubnetIds: [],
+                  SecurityGroupIds: []
+                };
+                configParams.Environment = {};
+                updateConfig(deploy_function, configParams).then(function () {
+                  done(true);
+                });
+              }
             }).catch(function (err) {
             grunt.fail.warn('Uncaught exception: ' + err.message);
           });
