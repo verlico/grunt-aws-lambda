@@ -294,7 +294,7 @@ deployTask.getHandler = function (grunt) {
                   SubnetIds: [],
                   SecurityGroupIds: []
                 };
-                configParams.Environment = {NODE_ENV: 'development'};
+                configParams.Environment = {Variables: {}};
                 updateConfig(deploy_function, configParams).then(function () {
                   done(true);
                 });
