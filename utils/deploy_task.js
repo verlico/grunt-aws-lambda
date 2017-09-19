@@ -39,9 +39,10 @@ deployTask.getHandler = function (grunt) {
             aliases: null,
             enablePackageVersionAlias: false,
             subnetIds: null,
-            securityGroupIds: null
+            securityGroupIds: null,
+            environmentVariables: null
         });
-	
+
         if (options.profile !== null) {
             var credentials = new AWS.SharedIniFileCredentials({profile: options.profile});
             AWS.config.credentials = credentials;
@@ -155,6 +156,13 @@ deployTask.getHandler = function (grunt) {
                  SecurityGroupIds : options.securityGroupIds
                };
             }
+
+            if (options.environmentVariables!==null){
+                configParams.Environment = {
+                  Variables:options.environmentVariables
+              }
+            }
+
 
             var updateConfig = function (func_name, func_options) {
                 var deferred = Q.defer();
