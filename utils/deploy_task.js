@@ -289,13 +289,7 @@ deployTask.getHandler = function (grunt) {
               return setPackageVersionAlias(deploy_function);
             })
             .then(function () {
-              if (configParams.VpcConfig !== null) {
-                delete configParams.VpcConfig;
-                delete configParams.Environment;
-                updateConfig(deploy_function, configParams).then(function () {
-                  done(true);
-                })
-              }
+              done(true);
             }).catch(function (err) {
             grunt.fail.warn('Uncaught exception: ' + err.message);
           });
